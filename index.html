@@ -37,12 +37,13 @@
         }
 
         /* === HERO SECTION === */
-                .hero {
+        .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 56px; 
+            padding-top: 80px;
+            padding-bottom: 60px;
         }
         .hero .hero-image {
             position: relative;
@@ -56,8 +57,10 @@
 
         .hero .hero-image .image-wrapper img {
             border-radius: 20px;
-            box-shadow: 0 5px 15px color-mix(in srgb, var(--default-color), transparent 95%);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
             transition: transform 0.3s ease;
+            width: 100%;
+            height: auto;
         }
 
         .hero .hero-image .image-wrapper img:hover {
@@ -71,39 +74,37 @@
         }
         .hero h1 {
             color: #00bfff;
-            font-size: 4rem;
+            font-size: clamp(2rem, 5vw, 4rem);
             font-family: var(--heading-font);
             font-weight: 700;
+            margin-bottom: 1rem;
         }
         .hero h4 {
             color: #ffffff;
-            font-size: 1.5rem;
-        }
-        .profile-img {
-            border-radius: 20px;
-            max-width: 300px;
-            position: relative;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 1rem;
         }
         .floating-btn {
             position: absolute;
             background-color: #0f0f1a;
             color: #00bfff;
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-            font-size: 1.2rem;
+            font-size: 1rem;
+            white-space: nowrap;
         }
 
         /* === ABOUT SECTION === */
         .about {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: #0d161c;
         }
         .section-title {
             font-family: var(--heading-font);
-            font-size: 2.8rem;
+            font-size: clamp(2rem, 4vw, 2.8rem);
             color: var(--primary-color);
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             position: relative;
         }
         .section-title::after {
@@ -114,6 +115,10 @@
             position: absolute;
             bottom: -15px;
             left: 0;
+        }
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
         }
         .skill-card {
             background-color: #1a252f;
@@ -135,7 +140,7 @@
 
         /* === TECH STACK SECTION === */
         .tech-stack {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: var(--bg-dark);
         }
         .tech-card {
@@ -158,7 +163,7 @@
 
         /* === PROJECTS SECTION === */
         .projects {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: #0d161c;
         }
         .project-card {
@@ -166,6 +171,9 @@
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         .project-card:hover {
             transform: translateY(-10px);
@@ -178,6 +186,15 @@
         }
         .project-card .card-body {
             padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card .card-body h4 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+        .project-card .card-body p {
+            flex: 1;
         }
         .btn-custom {
             background-color: var(--primary-color);
@@ -185,13 +202,16 @@
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: 500;
+            color: white;
         }
         .btn-custom:hover {
             background-color: #009fd9;
+            color: white;
         }
         .btn-outline-custom {
-            border-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
             color: var(--primary-color);
+            background: transparent;
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: 500;
@@ -203,7 +223,7 @@
 
         /* === CONTACT & FOOTER === */
         .contact {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: var(--bg-dark);
         }
         .form-control {
@@ -212,8 +232,10 @@
             color: white;
         }
         .form-control:focus {
+            background-color: #1a252f;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.25rem rgba(0, 191, 255, 0.25);
+            color: white;
         }
         footer {
             background-color: #0f0f1a;
@@ -228,17 +250,71 @@
         .social-icon:hover {
             color: var(--primary-color);
         }
-        @media (max-width: 768px) {
+
+        /* Mobile Specific Styles */
+        @media (max-width: 767px) {
             .hero {
-                padding: 100px 0;
+                padding-top: 70px;
+                text-align: center;
             }
-            .section-title {
-                font-size: 2.3rem;
+            .hero .hero-image .image-wrapper {
+                max-width: 280px;
+                margin: 30px auto;
+            }
+            .floating-btn {
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+            .floating-btn span {
+                display: inline;
             }
             .about, .tech-stack, .projects, .contact {
-                padding: 80px 0;
+                padding: 60px 0;
+            }
+            .tech-icon {
+                font-size: 2.8rem;
+            }
+            .project-card img {
+                height: 200px;
+            }
+            .btn-custom, .btn-outline-custom {
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
         }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero .hero-image .image-wrapper {
+                max-width: 350px;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1320px;
+            }
+        }
+
+        /* Fix for very small screens */
+        @media (max-width: 380px) {
+            .floating-btn {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            .social-icon {
+                font-size: 1.4rem;
+                margin: 0 8px;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -265,34 +341,34 @@
     <!-- Home Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-md-6">
+            <div class="row align-items-center g-4 g-lg-5">
+                <div class="col-lg-6 order-2 order-lg-1">
                     <h1>Hello, I'm Olatide Enoch</h1>
                     <h4>Creative Python Developer</h4>
-                    <p>I am a full-stack Python developer passionate about building fast, scalable, and user-friendly web applications. I specialize in turning ideas into reliable digital products.</p>
-                    <div class="mt-4">
-                        <a href="#projects" class="btn btn-primary me-3 px-4 py-2">View My Work</a>
-                        <a href="#contact" class="btn btn-outline-primary px-4 py-2">Get In Touch</a>
+                    <p class="mb-4">I am a full-stack Python developer passionate about building fast, scalable, and user-friendly web applications. I specialize in turning ideas into reliable digital products.</p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 mb-4 justify-content-center justify-content-lg-start">
+                        <a href="#projects" class="btn btn-primary btn-custom px-4 py-2">View My Work</a>
+                        <a href="#contact" class="btn btn-outline-primary btn-outline-custom px-4 py-2">Get In Touch</a>
                     </div>
-                    <div class="mt-4">
-                        <a href="https://x.com/Crafted1638" class="social-icon"><i class="bi bi-twitter-x"></i></a>
-                        <a href="https://github.com/olatideenoch" class="social-icon"><i class="bi bi-github"></i></a>
-                        <a href="https://www.instagram.com/enoch_117" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                        <a href="https://x.com/Crafted1638" class="social-icon" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://github.com/olatideenoch" class="social-icon" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="https://www.instagram.com/enoch_117" class="social-icon" target="_blank"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2">
-                    <div class="hero-image" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="hero-image">
                         <div class="image-wrapper">
                             <img src="assets/img/profile/pp.jpg" alt="Olatide Enoch" class="img-fluid">
-                            <div class="floating-btn" style="top: 10%; right: -14%;">
+                            <div class="floating-btn d-none d-sm-block" style="top: 10%; right: -14%;">
                                 <i class="bi bi-palette me-1"></i>
                                 <span>Design</span>
                             </div>
-                            <div class="floating-btn" style="top: 45%; right: -15%;">
+                            <div class="floating-btn d-none d-sm-block" style="top: 45%; right: -15%;">
                                 <i class="bi bi-code-slash me-1"></i>
                                 <span>Code</span>
                             </div>
-                            <div class="floating-btn" style="top: 80%; right: -18%;">
+                            <div class="floating-btn d-none d-sm-block" style="top: 80%; right: -18%;">
                                 <i class="bi bi-lightbulb me-1"></i>
                                 <span>Ideas</span>
                             </div>
@@ -307,7 +383,7 @@
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">About Me</h2>
-            <div class="row align-items-center g-5">
+            <div class="row align-items-center g-4 g-lg-5">
                 <div class="col-lg-6">
                     <p class="lead">
                         As a Transportation Technology student, I'm driven by the vision of revolutionizing transportation through smart technology. 
@@ -320,49 +396,49 @@
                 <div class="col-lg-6">
                     <h4 class="mb-4">Skills</h4>
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-code-slash skill-icon"></i>
                                 <h6>Core Python Proficiency</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-server skill-icon"></i>
                                 <h6>Backend Development</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-braces skill-icon"></i>
                                 <h6>Frontend Development</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-database skill-icon"></i>
                                 <h6>Database Management</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-bar-chart skill-icon"></i>
                                 <h6>Data Science & Analysis</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-cloud-arrow-up skill-icon"></i>
                                 <h6>API Integration & Automation</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-git skill-icon"></i>
                                 <h6>Version Control</h6>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="skill-card">
                                 <i class="bi bi-shield-lock skill-icon"></i>
                                 <h6>Web Security Fundamentals</h6>
@@ -380,8 +456,8 @@
         <div class="container">
             <h2 class="section-title text-center">Tech Stack</h2>
             <p class="text-center lead mb-5">Here are the technologies I use in my projects:</p>
-            <div class="row g-5 justify-content-center">
-                <div class="col-lg-4 col-md-6">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="tech-card">
                         <i class="bi bi-code-square tech-icon"></i>
                         <h4>Frontend</h4>
@@ -392,7 +468,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="tech-card">
                         <i class="bi bi-server tech-icon"></i>
                         <h4>Backend</h4>
@@ -403,7 +479,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="tech-card">
                         <i class="bi bi-bar-chart-line tech-icon"></i>
                         <h4>Data Science</h4>
@@ -424,59 +500,59 @@
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title text-center">My Projects</h2>
-            <div class="row g-5">
+            <div class="row g-4">
                 <!-- Project 1 -->
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="project-card">
                         <img src="./assets/img/projects/img_1.jpg" alt="Blog Website" class="img-fluid">
                         <div class="card-body">
                             <h4>Blog Haven</h4>
                             <p>This is a fully functional blog application developed with Python and Flask, featuring a complete user authentication system and role-based access control.</p>
-                            <div class="d-flex gap-3 mt-4">
-                                <a href="https://blog-web-3zs0.onrender.com" class="btn btn-custom">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/Blog-web-project" class="btn btn-outline-custom">View on GitHub</a>
+                            <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                                <a href="https://blog-web-3zs0.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
+                                <a href="https://github.com/olatideenoch/Blog-web-project" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Project 2 -->
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="project-card">
                         <img src="./assets/img/projects/img_2.png" alt="MyPersonal Bible App" class="img-fluid">
                         <div class="card-body">
                             <h4>MyPersonal Bible App</h4>
                             <p>A peaceful web app to read, search, and meditate on Scripture with multiple versions and daily verses.</p>
-                            <div class="d-flex gap-3 mt-4">
-                                <a href="https://mypersonal-bible-app.onrender.com" class="btn btn-custom">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/MyPersonal-bible-app" class="btn btn-outline-custom">View on GitHub</a>
+                            <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                                <a href="https://mypersonal-bible-app.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
+                                <a href="https://github.com/olatideenoch/MyPersonal-bible-app" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
                             </div>
                         </div>
                     </div>
                 </div>                
                 <!-- Project 3 -->
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="project-card">
                         <img src="./assets/img/projects/img_3.jpg" alt="PDF2Audio Converter" class="img-fluid">
                         <div class="card-body">
                             <h4>PDF2Audio Converter</h4>
                             <p>Transform PDFs, documents, and books into high-quality MP3 audio files using text-to-speech.</p>
-                            <div class="d-flex gap-3 mt-4">
-                                <a href="https://pdf2audio-z9gy.onrender.com" class="btn btn-custom">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/pdf2audio" class="btn btn-outline-custom">View on GitHub</a>
+                            <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                                <a href="https://pdf2audio-z9gy.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
+                                <a href="https://github.com/olatideenoch/pdf2audio" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Project 2 -->
-                <div class="col-lg-6">
+                <!-- Project 4 -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="project-card">
-                        <img src="./assets/img/projects/img_4.png" alt="MyPersonal Bible App" class="img-fluid">
+                        <img src="./assets/img/projects/img_4.png" alt="Movie Collection Manager" class="img-fluid">
                         <div class="card-body">
                             <h4>Movie Collection Manager</h4>
                             <p>A web application that lets users discover movies via TMDB API and manage their personal collection with full CRUD functionality and database storage.</p>
-                            <div class="d-flex gap-3 mt-4">
-                                <a href="https://movie-collection-manager.onrender.com" class="btn btn-custom">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/movie-collection-manager" class="btn btn-outline-custom">View on GitHub</a>
+                            <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+                                <a href="https://movie-collection-manager.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
+                                <a href="https://github.com/olatideenoch/movie-collection-manager" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -490,23 +566,23 @@
         <div class="container">
             <h2 class="section-title text-center">Get in Touch</h2>
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6 col-md-8 col-sm-12">
                     <form action="https://formspree.io/f/xykgzrne" method="POST">
                         <div class="mb-3">
                             <label for="name" class="form-label">Your Name</label>
-                            <input type="text" class="form-control bg-dark text-white" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Your Email</label>
-                            <input type="email" class="form-control bg-dark text-white" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control bg-dark text-white" id="message" name="message" rows="5" required></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-custom w-100">Send Message</button>
                     </form>
-                    <p class="text-center mt-4">Or reach me at: olatideenoch1440@gmail.com | +2348039929334</p>
+                    <p class="text-center mt-4">Or reach me at: <a href="mailto:olatideenoch1440@gmail.com" class="text-primary">olatideenoch1440@gmail.com</a> | +2348039929334</p>
                 </div>
             </div>
         </div>
@@ -516,11 +592,11 @@
     <footer>
         <div class="container text-center">
             <div class="mb-3">
-                <a href="https://x.com/Crafted1638" class="social-icon"><i class="bi bi-twitter-x"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=100071790498962" class="social-icon"><i class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/enoch_117" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="https://x.com/Crafted1638" class="social-icon" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100071790498962" class="social-icon" target="_blank"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/enoch_117" class="social-icon" target="_blank"><i class="bi bi-instagram"></i></a>
             </div>
-            <p>© Copyright Olatide Enoch. All Rights Reserved</p>
+            <p>&copy; Copyright Olatide Enoch. All Rights Reserved</p>
         </div>
     </footer>
 
