@@ -4,327 +4,616 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olatide Enoch - Portfolio</title>
-    <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-            --heading-font: "Raleway", sans-serif;
-            --nav-font: "Poppins", sans-serif;
-            --primary-color: #00bfff;
-            --bg-dark: #101a20;
-        }
-        body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
-            font-family: var(--default-font);
-            scroll-behavior: smooth;
-        }
-        .navbar {
-            background-color: #0f0f1a;
-            font-family: var(--nav-font);
-        }
-        .navbar-brand, .nav-link {
-            color: var(--primary-color) !important;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-        .nav-link:hover {
-            color: #ffffff !important;
+            --primary: #00bfff;
+            --primary-dim: rgba(0,191,255,0.12);
+            --primary-glow: rgba(0,191,255,0.35);
+            --bg-base: #0a1520;
+            --bg-card: #111f2c;
+            --bg-nav: #080f18;
+            --text-main: #e8f4f8;
+            --text-muted: #7da8be;
+            --border: rgba(0,191,255,0.15);
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-mono: 'Space Mono', monospace;
         }
 
-        /* === HERO SECTION === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* ─── BACKGROUND MESH ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse 60% 50% at 80% 10%, rgba(0,191,255,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 10% 70%, rgba(0,100,180,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── NAVBAR ─── */
+        .navbar {
+            background: rgba(8,15,24,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            font-family: var(--font-display);
+            padding: 14px 0;
+        }
+        .navbar-brand {
+            color: var(--primary) !important;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 6px 14px !important;
+            border-radius: 6px;
+            transition: all 0.25s;
+        }
+        .nav-link:hover {
+            color: var(--primary) !important;
+            background: var(--primary-dim);
+        }
+        .navbar-toggler {
+            border-color: var(--border);
+        }
+        .navbar-toggler-icon {
+            filter: invert(60%) sepia(100%) saturate(600%) hue-rotate(180deg);
+        }
+
+        /* ─── HERO ─── */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding-top: 80px;
-            padding-bottom: 60px;
-        }
-        .hero .hero-image {
+            padding: 100px 0 60px;
             position: relative;
         }
-
-        .hero .hero-image .image-wrapper {
-            position: relative;
-            max-width: 450px;
-            margin: 0 auto;
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-dim);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            color: var(--primary);
+            margin-bottom: 22px;
         }
-
-        .hero .hero-image .image-wrapper img {
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3);
-            transition: transform 0.3s ease;
-            width: 100%;
-            height: auto;
+        .hero-tag .dot {
+            width: 7px; height: 7px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
         }
-
-        .hero .hero-image .image-wrapper img:hover {
-            transform: scale(1.02);
-        }
-
-        .hero p {
-            color: #cccccc;
-            font-size: 1.1rem;
-            line-height: 1.6;
+        @keyframes pulse-dot {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
         .hero h1 {
-            color: #00bfff;
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-family: var(--heading-font);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+        .hero h1 span { color: var(--primary); }
+        .hero-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        .role-badge {
+            background: var(--primary-dim);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
             font-weight: 700;
-            margin-bottom: 1rem;
         }
-        .hero h4 {
-            color: #ffffff;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            margin-bottom: 1rem;
+        .hero p.lead-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 520px;
+            margin-bottom: 32px;
         }
-        .floating-btn {
-            position: absolute;
-            background-color: #0f0f1a;
-            color: #00bfff;
-            padding: 10px 16px;
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+        .btn-primary-cta {
+            background: var(--primary);
+            color: #0a1520;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            text-decoration: none;
+            transition: all 0.25s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary-cta:hover {
+            background: #fff;
+            color: #0a1520;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--primary-glow);
+        }
+        .btn-ghost-cta {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.25s;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-ghost-cta:hover {
+            background: var(--primary-dim);
+            transform: translateY(-2px);
+        }
+        .hero-socials a {
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            margin-right: 18px;
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+        .hero-socials a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        /* Profile image */
+        .profile-wrap {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .profile-wrap img {
+            width: 100%;
             border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
-            font-size: 1rem;
+            box-shadow: 0 0 0 1px var(--border), 0 20px 60px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+        .profile-wrap img:hover { transform: scale(1.02); }
+        .floating-badge {
+            position: absolute;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            padding: 8px 14px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            font-size: 0.82rem;
+            font-family: var(--font-mono);
+            display: flex; align-items: center; gap: 6px;
             white-space: nowrap;
+            backdrop-filter: blur(8px);
         }
 
-        /* === ABOUT SECTION === */
-        .about {
-            padding: 80px 0;
-            background-color: #0d161c;
+        /* ─── SECTION COMMONS ─── */
+        section { position: relative; z-index: 1; }
+        .section-pad { padding: 90px 0; }
+        .section-alt { background: rgba(11,22,34,0.7); }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
         }
         .section-title {
-            font-family: var(--heading-font);
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            color: var(--primary-color);
-            margin-bottom: 40px;
-            position: relative;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            letter-spacing: -1.5px;
+            color: #fff;
+            margin-bottom: 50px;
         }
+        .section-title span { color: var(--primary); }
+        .section-title.centered { text-align: center; }
         .section-title::after {
             content: '';
-            width: 80px;
-            height: 4px;
-            background: var(--primary-color);
-            position: absolute;
-            bottom: -15px;
-            left: 0;
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            margin-top: 14px;
         }
-        .section-title.text-center::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .skill-card {
-            background-color: #1a252f;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        .skill-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.2);
-        }
-        .skill-icon {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .section-title.centered::after {
+            margin: 14px auto 0;
         }
 
-        /* === TECH STACK SECTION === */
-        .tech-stack {
-            padding: 80px 0;
-            background-color: var(--bg-dark);
+        /* ─── ABOUT ─── */
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-muted);
+            margin-bottom: 28px;
         }
-        .tech-card {
-            background-color: #1a252f;
-            border-radius: 15px;
-            padding: 30px;
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            transition: all 0.3s;
+            height: 100%;
             text-align: center;
-            transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--primary-dim);
+        }
+        .skill-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .skill-card h6 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* ─── TECH STACK ─── */
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
             height: 100%;
         }
         .tech-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 191, 255, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px var(--primary-dim);
         }
-        .tech-icon {
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
+        .tech-card-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .tech-card h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+        .tech-card ul li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 3px 0;
         }
 
-        /* === PROJECTS SECTION === */
-        .projects {
-            padding: 80px 0;
-            background-color: #0d161c;
+        /* ─── PROJECTS SECTION ─── */
+        .projects-section { padding: 90px 0; }
+
+        /* Sub-section dividers */
+        .project-category {
+            margin-bottom: 70px;
         }
+        .cat-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 36px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .cat-icon {
+            width: 50px; height: 50px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+        .cat-icon.blue { background: var(--primary-dim); color: var(--primary); border: 1px solid var(--border); }
+        .cat-icon.teal { background: rgba(0,200,150,0.1); color: #00c896; border: 1px solid rgba(0,200,150,0.2); }
+        .cat-icon.amber { background: rgba(255,165,0,0.1); color: #ffa500; border: 1px solid rgba(255,165,0,0.2); }
+
+        .cat-header-text h3 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #fff;
+            margin: 0;
+        }
+        .cat-header-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 2px 0 0;
+        }
+        .cat-count {
+            margin-left: auto;
+            background: var(--primary-dim);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+        .cat-count.ds { background: rgba(0,200,150,0.08); border-color: rgba(0,200,150,0.2); color: #00c896; }
+        .cat-count.tr { background: rgba(255,165,0,0.08); border-color: rgba(255,165,0,0.2); color: #ffa500; }
+
+        /* Project cards */
         .project-card {
-            background-color: #1a252f;
-            border-radius: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             height: 100%;
             display: flex;
             flex-direction: column;
         }
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 191, 255, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,191,255,0.1);
         }
+        .project-card.ds:hover { border-color: #00c896; box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,200,150,0.15); }
+        .project-card.tr:hover { border-color: #ffa500; box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,165,0,0.15); }
+
         .project-card img {
             width: 100%;
-            height: 220px;
+            height: 210px;
             object-fit: cover;
         }
-        .project-card .card-body {
-            padding: 25px;
+        .proj-placeholder {
+            width: 100%;
+            height: 210px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .proj-placeholder.blue { background: linear-gradient(135deg, #0e1f30 0%, #0a2035 100%); color: var(--primary); }
+        .proj-placeholder.teal { background: linear-gradient(135deg, #0a1f1a 0%, #081c17 100%); color: #00c896; }
+        .proj-placeholder.amber { background: linear-gradient(135deg, #1f1505 0%, #1a1200 100%); color: #ffa500; }
+        .proj-placeholder i { font-size: 3rem; opacity: 0.6; }
+
+        .project-body {
+            padding: 22px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-        .project-card .card-body h4 {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        .project-body h5 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 8px;
         }
-        .project-card .card-body p {
+        .project-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.65;
             flex: 1;
+            margin-bottom: 18px;
         }
-        .btn-custom {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            color: white;
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
         }
-        .btn-custom:hover {
-            background-color: #009fd9;
-            color: white;
+        .ptag {
+            background: rgba(0,191,255,0.07);
+            border: 1px solid rgba(0,191,255,0.15);
+            color: var(--primary);
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
         }
-        .btn-outline-custom {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            background: transparent;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-        }
-        .btn-outline-custom:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
+        .ptag.ds { background: rgba(0,200,150,0.07); border-color: rgba(0,200,150,0.15); color: #00c896; }
+        .ptag.tr { background: rgba(255,165,0,0.07); border-color: rgba(255,165,0,0.15); color: #ffa500; }
 
-        /* === CONTACT & FOOTER === */
-        .contact {
-            padding: 80px 0;
-            background-color: var(--bg-dark);
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+        .btn-proj-demo {
+            background: var(--primary);
+            color: #0a1520;
+            font-weight: 700;
+            font-size: 0.82rem;
+            font-family: var(--font-display);
+            padding: 9px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: all 0.22s;
+            border: none;
+        }
+        .btn-proj-demo:hover {
+            background: #fff;
+            color: #0a1520;
+            transform: translateY(-2px);
+        }
+        .btn-proj-gh {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            font-weight: 700;
+            font-size: 0.82rem;
+            font-family: var(--font-display);
+            padding: 9px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: all 0.22s;
+        }
+        .btn-proj-gh:hover {
+            background: var(--primary-dim);
+            transform: translateY(-2px);
+        }
+        .btn-proj-gh.ds { color: #00c896; border-color: #00c896; }
+        .btn-proj-gh.ds:hover { background: rgba(0,200,150,0.08); }
+        .btn-proj-gh.tr { color: #ffa500; border-color: #ffa500; }
+        .btn-proj-gh.tr:hover { background: rgba(255,165,0,0.08); }
+
+        /* ─── CONTACT ─── */
+        .contact-section { padding: 90px 0; background: rgba(11,22,34,0.7); }
         .form-control {
-            background-color: #1a252f;
-            border-color: #2c3e50;
-            color: white;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            color: var(--text-main);
+            padding: 12px 16px;
+            font-family: var(--font-body);
         }
         .form-control:focus {
-            background-color: #1a252f;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(0, 191, 255, 0.25);
-            color: white;
+            background: var(--bg-card);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,191,255,0.12);
+            color: var(--text-main);
         }
+        .form-label { color: var(--text-muted); font-size: 0.88rem; font-weight: 500; margin-bottom: 6px; }
+        .btn-send {
+            background: var(--primary);
+            color: #0a1520;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 13px;
+            border-radius: 9px;
+            border: none;
+            width: 100%;
+            transition: all 0.25s;
+        }
+        .btn-send:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--primary-glow); }
+        .contact-info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 20px;
+        }
+        .contact-info a { color: var(--primary); text-decoration: none; }
+
+        /* ─── FOOTER ─── */
         footer {
-            background-color: #0f0f1a;
-            padding: 40px 0;
+            background: var(--bg-nav);
+            border-top: 1px solid var(--border);
+            padding: 36px 0;
+            text-align: center;
         }
         .social-icon {
-            font-size: 1.6rem;
-            color: #adb5bd;
-            margin: 0 12px;
-            transition: color 0.3s;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin: 0 10px;
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
         }
-        .social-icon:hover {
-            color: var(--primary-color);
-        }
+        .social-icon:hover { color: var(--primary); transform: translateY(-3px); }
+        footer p { color: var(--text-muted); font-size: 0.85rem; margin-top: 16px; }
 
-        /* Mobile Specific Styles */
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 991px) {
+            .hero { padding-top: 90px; }
+            .hero h1 { letter-spacing: -1px; }
+            .profile-wrap { max-width: 300px; }
+        }
         @media (max-width: 767px) {
-            .hero {
-                padding-top: 70px;
-                text-align: center;
-            }
-            .hero .hero-image .image-wrapper {
-                max-width: 220px;
-                margin: 10px auto;
-            }
-            .floating-btn {
-                font-size: 0.65rem;
-                padding: 8px 11px;
-            }
-            .floating-btn span {
-                display: inline;
-            }
-            .about, .tech-stack, .projects, .contact {
-                padding: 60px 0;
-            }
-            .tech-icon {
-                font-size: 2rem;
-            }
-            .project-card img {
-                height: 180px;
-            }
-            .btn-custom, .btn-outline-custom {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-            .lead {
-                font-size: 1.1rem;
-                text-align: justify;
-            }
-            .card-body {
-                height: auto;
-            }
-            .card-body p{
-                font-size: 0.9rem;
-            }
-            .project-card .card-body h4 {
-                font-size: 1.1rem;
-            }
+            .hero { text-align: center; padding: 90px 0 50px; }
+            .hero p.lead-text { margin: 0 auto 28px; }
+            .hero-cta { justify-content: center; }
+            .hero-socials { text-align: center; }
+            .hero-roles { justify-content: center; }
+            .profile-wrap { max-width: 240px; margin: 0 auto 30px; }
+            .floating-badge { display: none; }
+            .section-pad { padding: 65px 0; }
+            .projects-section { padding: 65px 0; }
+            .project-category { margin-bottom: 50px; }
+            .cat-header { flex-wrap: wrap; gap: 10px; }
+            .cat-count { margin-left: 0; }
+            .project-card img, .proj-placeholder { height: 170px; }
+            .section-title { font-size: 1.8rem; letter-spacing: -0.8px; }
+            .btn-primary-cta, .btn-ghost-cta { padding: 11px 22px; font-size: 0.85rem; }
+            .btn-proj-demo, .btn-proj-gh { padding: 8px 14px; font-size: 0.8rem; }
         }
-
-        @media (min-width: 768px) and (max-width: 991px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            .hero .hero-image .image-wrapper {
-                max-width: 350px;
-            }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .project-actions { flex-direction: column; }
+            .btn-proj-demo, .btn-proj-gh { justify-content: center; }
         }
-
         @media (min-width: 1400px) {
-            .container {
-                max-width: 1320px;
-            }
+            .container { max-width: 1280px; }
         }
 
-        @media (max-width: 380px) {
-            .floating-btn {
-                font-size: 0.75rem;
-                padding: 6px 10px;
-            }
-            .navbar-brand {
-                font-size: 1rem;
-            }
-            .social-icon {
-                font-size: 1.4rem;
-                margin: 0 8px;
-            }
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        
+        .fade-up { animation: fadeUp 0.6s ease both; }
+        .fade-up-d1 { animation-delay: 0.1s; }
+        .fade-up-d2 { animation-delay: 0.2s; }
+        .fade-up-d3 { animation-delay: 0.3s; }
+        .fade-up-d4 { animation-delay: 0.4s; }
+
+        /* Skill tag pill */
+        .new-badge {
+            background: var(--primary);
+            color: #0a1520;
+            font-size: 0.62rem;
+            font-weight: 800;
+            border-radius: 4px;
+            padding: 1px 6px;
+            vertical-align: middle;
+            margin-left: 5px;
+            font-family: var(--font-mono);
+        }
     </style>
 </head>
 <body>
@@ -333,11 +622,11 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Olatide Enoch</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav gap-1">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tech-stack">Tech Stack</a></li>
@@ -348,40 +637,45 @@
         </div>
     </nav>
 
-    <!-- Home Section -->
+    <!-- ═══ HERO ═══ -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="row align-items-center g-4 g-lg-5">
-                <div class="order-2 col-lg-6 order-lg-1">
-                    <h1>Hello, I'm Olatide Enoch</h1>
-                    <h4>Creative Python Developer</h4>
-                    <p class="mb-4">I am a full-stack Python developer passionate about building fast, scalable, and user-friendly web applications. I specialize in turning ideas into reliable digital products.</p>
-                    <div class="flex-row gap-3 mb-4 d-flex flex-sm-row justify-content-center justify-content-lg-start">
-                        <a href="#projects" class="px-4 py-2 btn btn-primary btn-custom">View My Work</a>
-                        <a href="#contact" class="px-4 py-2 btn btn-outline-primary btn-outline-custom">Get In Touch</a>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 order-2 order-lg-1 fade-up">
+                    <div class="hero-tag">
+                        <span class="dot"></span>
+                        Available for opportunities
                     </div>
-                    <div class="d-flex justify-content-center justify-content-lg-start"> 
-                        <a href="https://x.com/Crafted1638" class="social-icon" target="_blank"><i class="bi bi-twitter-x"></i></a>
-                        <a href="https://github.com/olatideenoch" class="social-icon" target="_blank"><i class="bi bi-github"></i></a>
-                        <a href="https://www.linkedin.com/in/olatide-oluwadasimi/" class="social-icon" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    <h1>Hello, I'm<br><span>Olatide Enoch</span></h1>
+                    <div class="hero-roles">
+                        <span class="role-badge">Full-Stack Developer</span>
+                        <span class="role-badge">Data Scientist</span>
+                        <span class="role-badge">Transport Tech</span>
+                    </div>
+                    <p class="lead-text">
+                        I build scalable web applications, extract insights from data, and simulate transport systems — bridging the gap between software engineering, data science, and mobility technology.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn-primary-cta"><i class="bi bi-grid-3x3-gap-fill"></i> View My Work</a>
+                        <a href="#contact" class="btn-ghost-cta"><i class="bi bi-send"></i> Get In Touch</a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://x.com/Crafted1638" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://github.com/olatideenoch" target="_blank"><i class="bi bi-github"></i></a>
+                        <a href="https://www.linkedin.com/in/olatide-oluwadasimi/" target="_blank"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
-                <div class="order-1 col-lg-6 order-lg-2">
-                    <div class="hero-image">
-                        <div class="image-wrapper">
-                            <img src="assets/img/profile/pp.jpg" alt="Olatide Enoch" class="img-fluid">
-                            <div class="floating-btn d-sm-block" style="top: 10%; right: -14%;">
-                                <i class="bi bi-palette me-1"></i>
-                                <span>Design</span>
-                            </div>
-                            <div class="floating-btn d-sm-block" style="top: 45%; right: -15%;">
-                                <i class="bi bi-code-slash me-1"></i>
-                                <span>Code</span>
-                            </div>
-                            <div class="floating-btn d-sm-block" style="top: 80%; right: -18%;">
-                                <i class="bi bi-lightbulb me-1"></i>
-                                <span>Ideas</span>
-                            </div>
+                <div class="col-lg-6 order-1 order-lg-2 fade-up fade-up-d2">
+                    <div class="profile-wrap">
+                        <img src="assets/img/profile/pp.jpg" alt="Olatide Enoch" class="img-fluid">
+                        <div class="floating-badge" style="top: 8%; right: -12%;">
+                            <i class="bi bi-code-slash"></i> Code
+                        </div>
+                        <div class="floating-badge" style="top: 44%; right: -16%;">
+                            <i class="bi bi-bar-chart-line"></i> Data
+                        </div>
+                        <div class="floating-badge" style="bottom: 10%; right: -14%;">
+                            <i class="bi bi-signpost-2"></i> Transport
                         </div>
                     </div>
                 </div>
@@ -389,118 +683,161 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about" class="section-pad section-alt">
         <div class="container col-11">
+            <p class="section-label">Who I am</p>
             <h2 class="section-title">About Me</h2>
-            <div class="row align-items-center g-4 g-lg-5">
-                <div class="col-lg-6">
-                    <p class="lead">
-                        As a Transportation Technology student, I'm driven by the vision of revolutionizing transportation through smart technology. 
-                        I'm also a versatile Python developer proficient in backend systems, frontend development, and data science. 
-                        Through the Python Pro Bootcamp, I completed a series of hands-on projects that deepened my expertise and prepared me to build 
-                        practical, technology-driven solutions.
+            <div class="row align-items-start g-5" style="margin-top: -40px;">
+                <div class="col-lg-5">
+                    <p class="about-text">
+                        As a Transportation Technology student, I'm driven by the vision of revolutionizing mobility through smart technology. I'm a versatile Python developer proficient in backend systems, frontend development, data science, and transport simulation.
                     </p>
-                    <a href="./assets/resume/Olatide-Enoch-Resume.pdf" class="mt-3 btn btn-outline-custom" download="Olatide-Enoch-Resume.pdf">Download Resume <i class="bi bi-download ms-2"></i></a>
+                    <p class="about-text">
+                        I blend software engineering with data-driven analysis and simulation tools to tackle real-world transport challenges — from building web apps to modeling traffic flow and training machine learning models.
+                    </p>
+                    <a href="./assets/resume/Olatide-Enoch-Resume.pdf" class="btn-ghost-cta" download="Olatide-Enoch-Resume.pdf" style="width:fit-content;">
+                        <i class="bi bi-download"></i> Download Resume
+                    </a>
                 </div>
-                <div class="col-lg-6 ">
-                    <h4 class="mb-4">Skills</h4>
+                <div class="col-lg-7" style="margin-top: -30px;">
+                    <h5 style="font-family:var(--font-display);font-weight:700;margin-bottom:20px;color:#fff;">Core Skills</h5>
                     <div class="row g-3">
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
                                 <i class="bi bi-code-slash skill-icon"></i>
-                                <h6>Core Python Proficiency</h6>
+                                <h6>Python Proficiency</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
                                 <i class="bi bi-server skill-icon"></i>
                                 <h6>Backend Development</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
                                 <i class="bi bi-braces skill-icon"></i>
                                 <h6>Frontend Development</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
                                 <i class="bi bi-database skill-icon"></i>
                                 <h6>Database Management</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
                                 <i class="bi bi-bar-chart skill-icon"></i>
                                 <h6>Data Science & Analysis</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
-                                <i class="bi bi-cloud-arrow-up skill-icon"></i>
-                                <h6>API Integration & Automation</h6>
+                                <i class="bi bi-cpu skill-icon"></i>
+                                <h6>Machine Learning</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
+                            <div class="skill-card">
+                                <i class="bi bi-cloud-arrow-up skill-icon"></i>
+                                <h6>API Integration</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <div class="skill-card">
+                                <i class="bi bi-signpost-2 skill-icon"></i>
+                                <h6>Transport Simulation</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <div class="skill-card">
+                                <i class="bi bi-geo-alt skill-icon"></i>
+                                <h6>GIS & Spatial Data</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <div class="skill-card">
+                                <i class="bi bi-shield-lock skill-icon"></i>
+                                <h6>Web Security</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
                                 <i class="bi bi-git skill-icon"></i>
                                 <h6>Version Control</h6>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-6">
+                        <div class="col-6 col-sm-4">
                             <div class="skill-card">
-                                <i class="bi bi-shield-lock skill-icon"></i>
-                                <h6>Web Security Fundamentals</h6>
+                                <i class="bi bi-box skill-icon"></i>
+                                <h6>3D Simulation & Unity</h6>
                             </div>
                         </div>
                     </div>
-                    <p class="mt-4"><strong>Experience:</strong> Started this tech journey 3 years ago and passionate about becoming a great developer.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack Section -->
-    <section id="tech-stack" class="tech-stack">
+    <!-- ═══ TECH STACK ═══ -->
+    <section id="tech-stack" class="section-pad">
         <div class="container col-11">
-            <h2 class="text-center section-title">Tech Stack</h2>
-            <p class="mb-5 text-center lead">Here are the technologies I use in my projects:</p>
+            <p class="section-label text-center">Tools of the trade</p>
+            <h2 class="section-title centered">Tech Stack</h2>
             <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <!-- Frontend -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="tech-card">
-                        <i class="bi bi-code-square tech-icon"></i>
+                        <i class="bi bi-code-square tech-card-icon"></i>
                         <h4>Frontend</h4>
-                        <ul class="mt-3 list-unstyled">
-                            <li>• HTML</li>
-                            <li>• CSS</li>
-                            <li>• Bootstrap</li>
-                            <li>• Tailwind CSS</li>
+                        <ul class="list-unstyled">
+                            <li>HTML / CSS</li>
+                            <li>Bootstrap</li>
+                            <li>Tailwind CSS</li>
+                            <li>JavaScript</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <!-- Backend -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="tech-card">
-                        <i class="bi bi-server tech-icon"></i>
+                        <i class="bi bi-server tech-card-icon"></i>
                         <h4>Backend</h4>
-                        <ul class="mt-3 list-unstyled">
-                            <li>• Python</li>
-                            <li>• FastAPI</li>
-                            <li>• Flask/Jinja</li>
-                            <li>• SQLite</li>
+                        <ul class="list-unstyled">
+                            <li>Python</li>
+                            <li>FastAPI</li>
+                            <li>Flask / Jinja2</li>
+                            <li>SQLite / PostgreSQL</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <!-- Data Science -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="tech-card">
-                        <i class="bi bi-bar-chart-line tech-icon"></i>
+                        <i class="bi bi-bar-chart-line tech-card-icon"></i>
                         <h4>Data Science</h4>
-                        <ul class="mt-3 list-unstyled">
-                            <li>• Pandas</li>
-                            <li>• NumPy</li>
-                            <li>• Seaborn</li>
-                            <li>• Matplotlib</li>
-                            <li>• Scikit-learn</li>
+                        <ul class="list-unstyled">
+                            <li>Pandas / NumPy</li>
+                            <li>Scikit-learn</li>
+                            <li>Matplotlib / Seaborn</li>
+                            <li>R for ML</li>
+                            <li>Jupyter Notebooks</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Transport Tech -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="tech-card">
+                        <i class="bi bi-signpost-split tech-card-icon" style="color:#ffa500;"></i>
+                        <h4>Transport Tech</h4>
+                        <ul class="list-unstyled">
+                            <li>SUMO & TraCI</li>
+                            <li>VISSIM</li>
+                            <li>QGIS / OpenStreetMap</li>
+                            <li>Unity / Sumo2Unity</li>
+                            <li>Python & R for ML</li>
                         </ul>
                     </div>
                 </div>
@@ -508,113 +845,284 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <!-- ═══ PROJECTS ═══ -->
+    <section id="projects" class="projects-section section-alt">
         <div class="container col-11">
-            <h2 class="text-center section-title">My Projects</h2>
-            <div class="row g-4 ">
-                <!-- Project 1 -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="project-card">
-                        <img src="./assets/img/projects/img_2.png" alt="MyPersonal Bible App" class="img-fluid">
-                        <div class="card-body">
-                            <h4>MyPersonal Bible App</h4>
-                            <p>A peaceful web app to read, search, and meditate on Scripture with multiple versions and daily verses.</p>
-                            <div class="gap-3 mt-4 d-flex flex-column flex-sm-row">
-                                <a href="https://mypersonal-bible-app.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/MyPersonal-bible-app" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
-                            </div>
-                        </div>
+            <p class="section-label">What I've built</p>
+            <h2 class="section-title">My Projects</h2>
+
+            <!-- ── 1. FULL STACK ── -->
+            <div class="project-category">
+                <div class="cat-header">
+                    <div class="cat-icon blue"><i class="bi bi-layers-half"></i></div>
+                    <div class="cat-header-text">
+                        <h3>Full-Stack Development</h3>
+                        <p>Web applications built end-to-end with Python backends</p>
                     </div>
-                </div>                
-                <!-- Project 2 -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="project-card">
-                        <img src="./assets/img/projects/img_3.jpg" alt="PDF2Audio Converter" class="img-fluid">
-                        <div class="card-body">
-                            <h4>PDF2Audio Converter</h4>
-                            <p>Transform PDFs, documents, and books into high-quality MP3 audio files using text-to-speech.</p>
-                            <div class="gap-3 mt-4 d-flex flex-column flex-sm-row">
-                                <a href="https://pdf2audio-z9gy.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/pdf2audio" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
-                            </div>
-                        </div>
-                    </div>
+                    <span class="cat-count">4 Projects</span>
                 </div>
-                <!-- Project 3 -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="project-card">
-                        <img src="./assets/img/projects/img_1.jpg" alt="Blog Website" class="img-fluid">
-                        <div class="card-body">
-                            <h4>Blog Haven</h4>
-                            <p>This is a fully functional blog application developed with Python and Flask, featuring a complete user authentication system and role-based access control.</p>
-                            <div class="gap-3 mt-4 d-flex flex-column flex-sm-row">
-                                <a href="https://blog-web-3zs0.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/Blog-web-project" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
+                <div class="row g-4">
+                    <!-- FS Project 1 -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="project-card">
+                            <img src="./assets/img/projects/img_2.png" alt="MyPersonal Bible App" loading="lazy">
+                            <div class="project-body">
+                                <h5>MyPersonal Bible App</h5>
+                                <div class="project-tags">
+                                    <span class="ptag">Python</span><span class="ptag">Flask</span><span class="ptag">SQLite</span>
+                                </div>
+                                <p>A peaceful web app to read, search, and meditate on Scripture with multiple versions and daily verses.</p>
+                                <div class="project-actions">
+                                    <a href="https://mypersonal-bible-app.onrender.com" class="btn-proj-demo" target="_blank"><i class="bi bi-play-fill"></i> Live Demo</a>
+                                    <a href="https://github.com/olatideenoch/MyPersonal-bible-app" class="btn-proj-gh" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>               
-                <!-- Project 4 -->
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="project-card">
-                        <img src="./assets/img/projects/img_4.png" alt="Movie Collection Manager" class="img-fluid">
-                        <div class="card-body">
-                            <h4>Movie Collection Manager</h4>
-                            <p>A web application that lets users discover movies via TMDB API and manage their personal collection with full CRUD functionality and database storage.</p>
-                            <div class="gap-3 mt-4 d-flex flex-column flex-sm-row">
-                                <a href="https://movie-collection-manager.onrender.com" class="btn btn-custom" target="_blank">Live Demo</a>
-                                <a href="https://github.com/olatideenoch/movie-collection-manager" class="btn btn-outline-custom" target="_blank">View on GitHub</a>
+                    <!-- FS Project 2 -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="project-card">
+                            <img src="./assets/img/projects/img_3.jpg" alt="PDF2Audio Converter" loading="lazy">
+                            <div class="project-body">
+                                <h5>PDF2Audio Converter</h5>
+                                <div class="project-tags">
+                                    <span class="ptag">Python</span><span class="ptag">Flask</span><span class="ptag">TTS</span>
+                                </div>
+                                <p>Transform PDFs, documents, and books into high-quality MP3 audio files using text-to-speech technology.</p>
+                                <div class="project-actions">
+                                    <a href="https://pdf2audio-z9gy.onrender.com" class="btn-proj-demo" target="_blank"><i class="bi bi-play-fill"></i> Live Demo</a>
+                                    <a href="https://github.com/olatideenoch/pdf2audio" class="btn-proj-gh" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FS Project 3 -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="project-card">
+                            <img src="./assets/img/projects/img_1.jpg" alt="Blog Haven" loading="lazy">
+                            <div class="project-body">
+                                <h5>Blog Haven</h5>
+                                <div class="project-tags">
+                                    <span class="ptag">Python</span><span class="ptag">Flask</span><span class="ptag">Auth</span><span class="ptag">RBAC</span>
+                                </div>
+                                <p>A fully functional blog application with complete user authentication and role-based access control built with Python and Flask.</p>
+                                <div class="project-actions">
+                                    <a href="https://blog-web-3zs0.onrender.com" class="btn-proj-demo" target="_blank"><i class="bi bi-play-fill"></i> Live Demo</a>
+                                    <a href="https://github.com/olatideenoch/Blog-web-project" class="btn-proj-gh" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FS Project 4 -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="project-card">
+                            <img src="./assets/img/projects/img_4.png" alt="Movie Collection Manager" loading="lazy">
+                            <div class="project-body">
+                                <h5>Movie Collection Manager</h5>
+                                <div class="project-tags">
+                                    <span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">TMDB API</span><span class="ptag">CRUD</span>
+                                </div>
+                                <p>Discover movies via TMDB API and manage your personal collection with full CRUD functionality and database storage.</p>
+                                <div class="project-actions">
+                                    <a href="https://movie-collection-manager.onrender.com" class="btn-proj-demo" target="_blank"><i class="bi bi-play-fill"></i> Live Demo</a>
+                                    <a href="https://github.com/olatideenoch/movie-collection-manager" class="btn-proj-gh" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- ── 2. DATA SCIENCE ── -->
+            <div class="project-category">
+                <div class="cat-header">
+                    <div class="cat-icon teal"><i class="bi bi-graph-up-arrow"></i></div>
+                    <div class="cat-header-text">
+                        <h3>Data Science & Machine Learning</h3>
+                        <p>Exploratory analysis, predictive models, and data storytelling</p>
+                    </div>
+                    <span class="cat-count ds">3 Projects</span>
+                </div>
+                <div class="row g-4">
+                    <!-- DS Project 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card ds">
+                            <div class="proj-placeholder teal">
+                                <i class="bi bi-bar-chart-line"></i>
+                                <span><!-- Add project screenshot --></span>
+                            </div>
+                            <div class="project-body">
+                                <h5>Boston Housing & Transit Analysis</h5>
+                                <div class="project-tags">
+                                    <span class="ptag ds">Python</span><span class="ptag ds">Pandas</span><span class="ptag ds">Numpy</span><span class="ptag ds">Matplotlib</span><span class="ptag ds">Seaborn</span><span class="ptag ds">Plotly Express</span>
+                                </div>
+                                <p>An end-to-end machine learning study exploring how transport accessibility and socioeconomic factors influence housing prices in Boston. The project covers the full data science pipeline from data cleaning, EDA, regression, classification, clustering, and feature importance analysis using the classic Boston Housing dataset.</p>
+                                <div class="project-actions">
+                                    <a href="https://github.com/olatideenoch" class="btn-proj-gh ds" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DS Project 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card ds">
+                            <div class="proj-placeholder teal">
+                                <i class="bi bi-pie-chart"></i>
+                                <span><!-- Add project screenshot --></span>
+                            </div>
+                            <div class="project-body">
+                                <h5>Traffic Volume Analysis</h5>
+                                <div class="project-tags">
+                                    <span class="ptag ds">Python</span><span class="ptag ds">Pandas</span><span class="ptag ds">Seaborn</span><span class="ptag ds">Numpy</span><span class="ptag ds">Matplotlib</span><span class="ptag ds">Plotly Express</span>
+                                </div>
+                                <p>A data-driven exploratory analysis of real-world traffic volume patterns over time. The project involves cleaning and parsing datetime traffic data, then producing multiple visualizations time series line plots, KDE density plots, hour-by-hour box plots, and interactive day-of-week bar charts to identify peak periods, demand distribution, and flow trends across the day and week.</p>
+                                <div class="project-actions">
+                                    <a href="https://github.com/olatideenoch" class="btn-proj-gh ds" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DS Project 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card ds">
+                            <div class="proj-placeholder teal">
+                                <i class="bi bi-cpu"></i>
+                                <span><!-- Add project screenshot --></span>
+                            </div>
+                            <div class="project-body">
+                                <h5>Traffic Prediction with XGBoost</h5>
+                                <div class="project-tags">
+                                    <span class="ptag ds">Python</span><span class="ptag ds">XGBoost</span><span class="ptag ds">Pandas</span><span class="ptag ds">Scikit-learn</span>
+                                </div>
+                                <p>A suite of three XGBoost regression models built to predict key traffic metrics from real-time and historical inputs. Model 1 predicts traffic volume from time features (hour, day). Model 2 predicts travel time from road and weather conditions (distance, speed, rainfall, volume). Model 3 predicts congestion likelihood from current volume, historical volume, weather, and time with feature importance scores extracted from each model.</p>
+                                <div class="project-actions">
+                                    <a href="https://github.com/olatideenoch" class="btn-proj-gh ds" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 3. TRANSPORT ── -->
+            <div class="project-category" style="margin-bottom:0;">
+                <div class="cat-header">
+                    <div class="cat-icon amber"><i class="bi bi-signpost-split"></i></div>
+                    <div class="cat-header-text">
+                        <h3>Transport-Oriented Projects</h3>
+                        <p>Simulation, modelling, and spatial analysis of transport systems</p>
+                    </div>
+                    <span class="cat-count tr">3 Projects</span>
+                </div>
+                <div class="row g-4">
+                    <!-- TR Project 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card tr">
+                            <div class="proj-placeholder amber">
+                                <i class="bi bi-car-front"></i>
+                                <span><!-- Add project screenshot --></span>
+                            </div>
+                            <div class="project-body">
+                                <h5>SUMO Traffic Simulation with TraCI(Python)</h5>
+                                <div class="project-tags">
+                                    <span class="ptag tr">Python</span><span class="ptag tr">TraCI</span><span class="ptag tr">SUMO</span><span class="ptag tr">sumolib</span><span class="ptag tr">XML Network Config</span>
+                                </div>
+                                <p>A Python-controlled traffic simulation built on SUMO and TraCI that monitors vehicles in real time. The simulation runs a custom SUMO network and route configuration, tracking each vehicle's speed, position, and distance traveled per simulation step while extracting edge-level traffic metrics such as average speed. Designed as a foundation for traffic analytics and ML-ready dataset generation.</p>
+                                <div class="project-actions">
+                                    <a href="https://github.com/olatideenoch" class="btn-proj-gh tr" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TR Project 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card tr">
+                            <div class="proj-placeholder amber">
+                                <i class="bi bi-map"></i>
+                                <span><!-- Add project screenshot --></span>
+                            </div>
+                            <div class="project-body">
+                                <h5>Custom SUMO Pipeline Tool</h5>
+                                <div class="project-tags">
+                                    <span class="ptag tr">Python</span><span class="ptag tr">SUMO</span><span class="ptag tr">OpenStreetMap</span><span class="ptag tr">QGIS</span><span class="ptag tr">netedit</span><span class="ptag tr">XML</span><span class="ptag tr">CLI</span>
+                                </div>
+                                <p>An open-source Python CLI tool that replicates and extends SUMO's built-in osmWebWizard.py. Starting from a raw .osm file from OpenStreetMap, it automates the full pipeline — generating the road network, multi-vehicle route files (cars, buses, trucks, bicycles), trip files, and all SUMO configs. Users then choose to either edit traffic lights in netedit or launch the simulation immediately.</p>
+                                <div class="project-actions">
+                                    <a href="https://github.com/olatideenoch" class="btn-proj-gh tr" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TR Project 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="project-card tr">
+                            <div class="proj-placeholder amber">
+                                <i class="bi bi-unity"></i>
+                                <span><!-- Add project screenshot --></span>
+                            </div>
+                            <div class="project-body">
+                                <h5>SUMO Unity Network Integration</h5>
+                                <div class="project-tags">
+                                    <span class="ptag tr">SUMO</span><span class="ptag tr">Sumo2Unity</span><span class="ptag tr">Unity</span><span class="ptag tr">XML Network Config</span>
+                                </div>
+                                <p>A SUMO road network configured and exported specifically for 3D visualisation and real-time integration with Unity via the Sumo2Unity framework. The network (.net.xml), simulation settings (.netecfg), and SUMO configuration (.sumocfg) were prepared and tuned to run seamlessly within a Unity environment enabling immersive, real-time 3D traffic simulation rendering from a live SUMO backend.</p>
+                                <div class="project-actions">
+                                    <a href="https://github.com/olatideenoch" class="btn-proj-gh tr" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" class="contact-section">
         <div class="container col-11">
-            <h2 class="text-center section-title">Get in Touch</h2>
+            <p class="section-label text-center">Let's talk</p>
+            <h2 class="section-title centered">Get in Touch</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-8 col-sm-12">
                     <form action="https://formspree.io/f/xykgzrne" method="POST">
                         <div class="mb-3">
                             <label for="name" class="form-label">Your Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Your Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-custom w-100">Send Message</button>
+                        <button type="submit" class="btn-send">Send Message <i class="bi bi-send ms-2"></i></button>
                     </form>
-                    <p class="mt-4 text-center">Or reach me at: olatideenoch1440@gmail.com | +2348039929334 </p>
+                    <p class="contact-info mt-4">
+                        Or reach me directly at:
+                        <a href="mailto:olatideenoch1440@gmail.com">olatideenoch1440@gmail.com</a> &nbsp;|&nbsp; +2348039929334
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ═══ FOOTER ═══ -->
     <footer>
-        <div class="container text-center">
+        <div class="container">
             <div class="mb-3">
                 <a href="https://x.com/Crafted1638" class="social-icon" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://github.com/olatideenoch" class="social-icon" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.facebook.com/profile.php?id=100071790498962" class="social-icon" target="_blank"><i class="bi bi-facebook"></i></a>
                 <a href="https://www.instagram.com/enoch_117" class="social-icon" target="_blank"><i class="bi bi-instagram"></i></a>
                 <a href="https://www.linkedin.com/in/olatide-oluwadasimi/" class="social-icon" target="_blank"><i class="bi bi-linkedin"></i></a>
             </div>
-            </div>
-            <p>&copy; Copyright Olatide Enoch. All Rights Reserved</p>
+            <p>&copy; 2026 Olatide Enoch. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
