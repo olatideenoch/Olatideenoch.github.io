@@ -23,6 +23,106 @@
             --font-mono: 'Space Mono', monospace;
         }
 
+        /* ─── LIGHT MODE OVERRIDES ─── */
+        [data-theme="light"] {
+            --primary: #0099cc;
+            --primary-dim: rgba(0,153,204,0.10);
+            --primary-glow: rgba(0,153,204,0.30);
+            --bg-base: #eef6fb;
+            --bg-card: #ffffff;
+            --bg-nav: #ffffff;
+            --text-main: #0d1f2d;
+            --text-muted: #4a7a94;
+            --border: rgba(0,153,204,0.20);
+        }
+        [data-theme="light"] body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+        }
+        [data-theme="light"] body::before {
+            background:
+                radial-gradient(ellipse 60% 50% at 80% 10%, rgba(0,191,255,0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 10% 70%, rgba(0,100,180,0.03) 0%, transparent 70%);
+        }
+        [data-theme="light"] .navbar {
+            background: rgba(255,255,255,0.93);
+            border-bottom: 1px solid var(--border);
+        }
+        [data-theme="light"] .section-alt {
+            background: rgba(210,235,248,0.5);
+        }
+        [data-theme="light"] .contact-section {
+            background: rgba(210,235,248,0.5);
+        }
+        [data-theme="light"] .hero h1 { color: #0a1520; }
+        [data-theme="light"] .section-title { color: #0a1520; }
+        [data-theme="light"] .cat-header-text h3 { color: #0a1520; }
+        [data-theme="light"] .project-body h5 { color: #0a1520; }
+        [data-theme="light"] .tech-card h4 { color: #0a1520; }
+        [data-theme="light"] .form-control {
+            background: #fff;
+            color: var(--text-main);
+            border-color: var(--border);
+        }
+        [data-theme="light"] .form-control:focus {
+            background: #fff;
+            color: var(--text-main);
+        }
+        [data-theme="light"] footer {
+            background: #daedf7;
+            border-top: 1px solid var(--border);
+        }
+        [data-theme="light"] .floating-badge,
+        [data-theme="light"] .floating-badge.badge-code,
+        [data-theme="light"] .floating-badge.badge-data,
+        [data-theme="light"] .floating-badge.badge-transport {
+            background: #ffffff;
+            box-shadow: 0 4px 24px rgba(0,100,150,0.15), 0 0 0 1px rgba(0,153,204,0.1);
+        }
+        [data-theme="light"] .navbar-toggler-icon {
+            filter: invert(30%) sepia(80%) saturate(400%) hue-rotate(180deg);
+        }
+        [data-theme="light"] .proj-placeholder.blue {
+            background: linear-gradient(135deg, #ddf0fb 0%, #cce8f5 100%);
+        }
+        [data-theme="light"] .proj-placeholder.teal {
+            background: linear-gradient(135deg, #d0f5ec 0%, #bceee2 100%);
+        }
+        [data-theme="light"] .proj-placeholder.amber {
+            background: linear-gradient(135deg, #fff3d9 0%, #fce8b8 100%);
+        }
+
+        /* ─── THEME TOGGLE BUTTON ─── */
+        .theme-toggle {
+            background: var(--primary-dim);
+            border: 1.5px solid var(--border);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 5px 14px;
+            font-size: 0.83rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 6px;
+            transition: all 0.25s;
+        }
+        .theme-toggle:hover {
+            background: var(--primary-dim);
+            box-shadow: 0 4px 12px var(--primary-glow);
+            transform: translateY(-1px);
+        }
+
+        /* smooth theme transitions */
+        body, .navbar, .skill-card, .tech-card, .project-card,
+        .form-control, footer, .floating-badge, .section-alt,
+        .contact-section, .proj-placeholder {
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html { scroll-behavior: smooth; }
@@ -217,14 +317,64 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             color: var(--primary);
-            padding: 8px 14px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            padding: 10px 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,191,255,0.08);
             font-size: 0.82rem;
             font-family: var(--font-mono);
-            display: flex; align-items: center; gap: 6px;
+            display: flex; align-items: center; gap: 8px;
             white-space: nowrap;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            font-weight: 600;
+        }
+        .floating-badge i {
+            font-size: 1rem;
+        }
+        /* individual float animations with different speeds */
+        .floating-badge.badge-code {
+            animation: floatA 3.5s ease-in-out infinite;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 12px rgba(0,191,255,0.15);
+        }
+        .floating-badge.badge-data {
+            animation: floatB 4s ease-in-out infinite;
+            color: #00c896;
+            border-color: rgba(0,200,150,0.25);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 12px rgba(0,200,150,0.12);
+        }
+        .floating-badge.badge-data i { color: #00c896; }
+        .floating-badge.badge-transport {
+            animation: floatC 4.5s ease-in-out infinite;
+            color: #ffa500;
+            border-color: rgba(255,165,0,0.25);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 12px rgba(255,165,0,0.12);
+        }
+        .floating-badge.badge-transport i { color: #ffa500; }
+        @keyframes floatA {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-8px); }
+        }
+        @keyframes floatB {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-10px); }
+        }
+        @keyframes floatC {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-6px); }
+        }
+        /* pulse glow dot inside badge */
+        .badge-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+        .badge-dot.cyan  { background: var(--primary); box-shadow: 0 0 6px var(--primary); }
+        .badge-dot.green { background: #00c896; box-shadow: 0 0 6px #00c896; animation-delay: 0.5s; }
+        .badge-dot.amber { background: #ffa500; box-shadow: 0 0 6px #ffa500; animation-delay: 1s; }
+        @keyframes badgePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.4; transform: scale(0.8); }
         }
 
         /* ─── SECTION COMMONS ─── */
@@ -274,7 +424,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 18px;
+            padding: 16px 8px;
             transition: all 0.3s;
             height: 100%;
             text-align: center;
@@ -285,15 +435,17 @@
             box-shadow: 0 10px 30px var(--primary-dim);
         }
         .skill-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            display: block;
         }
         .skill-card h6 {
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-main);
             margin: 0;
+            line-height: 1.3;
         }
 
         /* ─── TECH STACK ─── */
@@ -563,6 +715,9 @@
             .hero { padding-top: 90px; }
             .hero h1 { letter-spacing: -1px; }
             .profile-wrap { max-width: 300px; }
+            /* Stack about columns cleanly on tablet */
+            #about .row.align-items-start { margin-top: 0 !important; }
+            #about .col-lg-7 { margin-top: 30px !important; }
         }
         @media (max-width: 767px) {
             .hero { text-align: center; padding: 90px 0 50px; }
@@ -574,6 +729,7 @@
             .floating-badge { display: none; }
             .section-pad { padding: 65px 0; }
             .projects-section { padding: 65px 0; }
+            .contact-section { padding: 65px 0; }
             .project-category { margin-bottom: 50px; }
             .cat-header { flex-wrap: wrap; gap: 10px; }
             .cat-count { margin-left: 0; }
@@ -581,11 +737,20 @@
             .section-title { font-size: 1.8rem; letter-spacing: -0.8px; }
             .btn-primary-cta, .btn-ghost-cta { padding: 11px 22px; font-size: 0.85rem; }
             .btn-proj-demo, .btn-proj-gh { padding: 8px 14px; font-size: 0.8rem; }
+            /* About section: stack and fix download button */
+            #about .row.align-items-start { margin-top: 0 !important; flex-direction: column; }
+            #about .col-lg-5, #about .col-lg-7 { width: 100%; margin-top: 0 !important; }
+            #about .col-lg-7 { margin-top: 32px !important; }
+            .btn-ghost-cta[download] { width: 100%; justify-content: center; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 2rem; }
             .project-actions { flex-direction: column; }
             .btn-proj-demo, .btn-proj-gh { justify-content: center; }
+            .skill-card h6 { font-size: 0.7rem; }
+            .skill-icon { font-size: 1.5rem; }
+            /* Core skills: 3 per row on small phones */
+            #about .row.g-3 > div { padding: 4px; }
         }
         @media (min-width: 1400px) {
             .container { max-width: 1280px; }
@@ -626,12 +791,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav gap-1">
+                <ul class="navbar-nav gap-1 align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tech-stack">Tech Stack</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+                            <i class="bi bi-sun-fill" id="toggleIcon"></i>
+                            <span id="toggleText">Light</span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -668,13 +839,16 @@
                 <div class="col-lg-6 order-1 order-lg-2 fade-up fade-up-d2">
                     <div class="profile-wrap">
                         <img src="assets/img/profile/pp.jpg" alt="Olatide Enoch" class="img-fluid">
-                        <div class="floating-badge" style="top: 8%; right: -12%;">
+                        <div class="floating-badge badge-code" style="top: 8%; right: -12%;">
+                            <span class="badge-dot cyan"></span>
                             <i class="bi bi-code-slash"></i> Code
                         </div>
-                        <div class="floating-badge" style="top: 44%; right: -16%;">
+                        <div class="floating-badge badge-data" style="top: 44%; right: -16%;">
+                            <span class="badge-dot green"></span>
                             <i class="bi bi-bar-chart-line"></i> Data
                         </div>
-                        <div class="floating-badge" style="bottom: 10%; right: -14%;">
+                        <div class="floating-badge badge-transport" style="bottom: 10%; right: -14%;">
+                            <span class="badge-dot amber"></span>
                             <i class="bi bi-signpost-2"></i> Transport
                         </div>
                     </div>
@@ -830,7 +1004,7 @@
                 <!-- Transport Tech -->
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="tech-card">
-                        <i class="bi bi-signpost-split tech-card-icon" style="color:#ffa500;"></i>
+                        <i class="bi bi-signpost-split tech-card-icon"></i>
                         <h4>Transport Tech</h4>
                         <ul class="list-unstyled">
                             <li>SUMO & TraCI</li>
@@ -1102,7 +1276,8 @@
                     </form>
                     <p class="contact-info mt-4">
                         Or reach me directly at:
-                        <a href="mailto:olatideenoch1440@gmail.com">olatideenoch1440@gmail.com</a> &nbsp;|&nbsp; +2348039929334
+                        <a href="mailto:olatideenoch1440@gmail.com">olatideenoch1440@gmail.com</a>
+                        &nbsp;|&nbsp; +2348039929334
                     </p>
                 </div>
             </div>
@@ -1124,5 +1299,32 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('themeToggle');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const toggleText = document.getElementById('toggleText');
+
+        // Apply saved theme on load (default: dark)
+        const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+        applyTheme(savedTheme);
+
+        function applyTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('portfolio-theme', theme);
+            if (theme === 'light') {
+                toggleIcon.className = 'bi bi-moon-fill';
+                toggleText.textContent = 'Dark';
+            } else {
+                toggleIcon.className = 'bi bi-sun-fill';
+                toggleText.textContent = 'Light';
+            }
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    </script>
 </body>
 </html>
